@@ -100,14 +100,17 @@ class ModuleManager(object):
             if iface not in list(self.interfaces.values()):
                 iface_id = self.generate_new_iface_id()
                 self.interfaces[iface_id] = str(iface)
-
+            else:
+                for iface_key in self.interfaces.keys():
+                    if self.interfaces[iface_key] == iface:
+                        iface_id = iface_key
+                        break
             if not iface_id in self.iface_to_module_mapping:
                 self.iface_to_module_mapping[iface_id] = [wishfulModule]
             else:
                 self.iface_to_module_mapping[iface_id].append(wishfulModule)
 
         return wishfulModule
-
 
     def add_module(self, moduleName, pyModuleName, className, interfaces, kwargs):
         self.log.debug("Add new module: {}:{}:{}:{}".format(moduleName, pyModuleName, className, interfaces))
