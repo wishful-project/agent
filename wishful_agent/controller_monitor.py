@@ -108,6 +108,7 @@ class ControllerMonitor(object):
         msgContainer = [topic, cmdDesc, msg]
 
         self.log.debug("Agent sends context-setup request to controller")
+        time.sleep(1)
         self.agent.transport.send_ctr_to_controller(msgContainer)
 
 
